@@ -5,26 +5,32 @@
 <div class="container" id="wrap">
     <div class="row">
       <div class="offset-xl-0 col-xl-2 offset-lg-0 col-lg-2 offset-md-0 col-md-4 offset-sm-0 col-sm-12 offset-xs-0 col-xs-12"></div>
-        <!-- <div class="col-md-6 col-md-offset-3"> -->
-            <form action="r" method="post" accept-charset="utf-8" class="form" role="form"><legend>Sign Up</legend>
-                    <div class="row">
-                        <div class="col-xs-6 col-md-6">
-                          <input type="text" name="firstname" value="" class="form-control input-lg" placeholder="First Name"  />
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                          <input type="text" name="lastname" value="" class="form-control input-lg" placeholder="Last Name"  />
-                        </div>
-                        </div>
-                        <input type="text" name="email" value="" class="form-control input-lg" placeholder="Your Email"  />
-                        <input type="password" name="password" value="" class="form-control input-lg" placeholder="Password"  />
-                        <input type="password" name="confirm_password" value="" class="form-control input-lg" placeholder="Confirm Password"  />
-                        <br />
-                        <div class="col-xs-14 col-md-14">
-                        <span class="help-block">By clicking Create my account, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use.</span>
-                        <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Create my account</button>
-                        <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">Back</button>
-                        </div>
-            </form>          
-        </div>
-    </div>            
-</div>
+          <form>
+            <legend>Sign Up</legend>
+            <br />
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="Firstname">First Name</label>
+                <input type="text" class="form-control" id="First name" placeholder="First name:">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="Lastname">Last Name</label>
+                <input type="text" class="form-control" id="Lastname" placeholder="Last name:">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="EmailAddress">Email Address</label>
+              <input type="email" class="form-control" id="email" placeholder="Email:">
+            </div>
+            <div class="form-group">
+              <label for="Password">Password</label>
+              <input type="password" class="form-control" id="Password" placeholder="Password:">
+            </div>
+            <div class="form-group">
+              <label for="Confirm Password">Comfirm Password</label>
+              <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm Password:">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+          </form>        
+    </div>
+</div>            
