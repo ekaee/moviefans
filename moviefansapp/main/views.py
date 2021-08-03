@@ -6,3 +6,6 @@ def index(request):
 
 def signup(request):
     return render(request, 'main/signup.html',)
+
+def about(request):
+    return render(request, 'main/about.html',)
