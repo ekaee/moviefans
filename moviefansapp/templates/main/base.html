@@ -26,10 +26,9 @@
       <li class="nav-item"><a class="nav-link" style="color:#6ca7d4 !important" href="#">Movies</a></li>
 
     </ul>
-
-      <button class="btn btn-outline-primary my-2 my-sm-0">Log in</button>
+      <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'main:login' %}" role="button">Login</a> 
       &nbsp;&nbsp;
-      <button class="btn btn-primary my-2 my-sm-0">Register</button>
+      <a class="btn btn-primary my-2 my-sm-0" href="{% url 'main:signup' %}" role="button">Register</a>
 
   </div>
 </nav>
