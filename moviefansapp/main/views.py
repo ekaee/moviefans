@@ -12,3 +12,12 @@ def login(request):
 
 def about(request):
     return render(request, 'main/about.html',)
+
+def movie(request):
+    return render(request, 'main/movie.html',)
+
+def profile(request):
+    return render(request, 'main/profile.html',)
+
+def search(request):
+    return render(request, 'main/search.html',)
