@@ -36,9 +36,7 @@ def movie(request, movie_slug):
     except:
         context["movie"] = None
 
-    return render(
-        request, "main/movie.html", context=context
-    )  # TODO: check template name
+    return render(request, "main/movie.html", context=context)
 
 
 def movie_list(request):
@@ -57,9 +55,7 @@ def genre(request, genre_slug):  # genre detail page
         context["genre"] = None
         context["genre_movies"] = None
 
-    return render(
-        request, "main/genre.html", context=context
-    )  # TODO: check template name
+    return render(request, "main/genre.html", context=context)
 
 
 def register(request):
