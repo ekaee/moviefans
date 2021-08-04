@@ -24,13 +24,13 @@ Home
     Categories
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">Action</li>
-    <li class="list-group-item">Animated</li>
-    <li class="list-group-item">Comedy</li>
-    <li class="list-group-item">Drama</li>
-    <li class="list-group-item">Fantasy</li>
-    <li class="list-group-item">Horror</li>
-    <li class="list-group-item">Sci-Fi</li>
+    <li class="list-group-item"><a href="{% url 'main:action' %}">Action</a></li>
+    <li class="list-group-item"><a href="{% url 'main:animated' %}">Animated</a></li>
+    <li class="list-group-item"><a href="{% url 'main:comedy' %}">Comedy</a></li>
+    <li class="list-group-item"><a href="{% url 'main:drama' %}">Drama</a></li>
+    <li class="list-group-item"><a href="{% url 'main:fantasy' %}">Fantasy</a></li>
+    <li class="list-group-item"><a href="{% url 'main:horror' %}">Horror</a></li>
+    <li class="list-group-item"><a href="{% url 'main:scifi' %}">Sci-Fi</a></li>
   </ul>
 </div>
 
@@ -43,7 +43,8 @@ Home
 
 <h1 style="font-size:600%;">Rango</h1>
 <br><br>
-    <form class="form-inline">
+    <form action="{% url 'main:search' %}" method="post" class="form-inline">
+    {% csrf_token %}
       <input class="form-control mr-sm-2" type="search" placeholder="Search Movie" aria-label="Search">
       <button class="btn btn-primary" type="submit">Search Movie</button>
 

@@ -21,3 +21,26 @@ def profile(request):
 
 def search(request):
     return render(request, 'main/search.html',)
+    
+#genres
+
+def action(request):
+    return render(request, 'main/genre_action.html',)
+    
+def animated(request):
+    return render(request, 'main/genre_animated.html',)
+    
+def comedy(request):
+    return render(request, 'main/genre_comedy.html',)
+    
+def drama(request):
+    return render(request, 'main/genre_drama.html',)
+    
+def fantasy(request):
+    return render(request, 'main/genre_fantasy.html',)
+    
+def horror(request):
+    return render(request, 'main/genre_horror.html',)
+    
+def scifi(request):
+    return render(request, 'main/genre_scifi.html',)
