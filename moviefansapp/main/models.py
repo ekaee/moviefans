@@ -39,7 +39,9 @@ class Movie(models.Model):
     genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
     description = models.CharField(max_length=CONTENT_MAX_LENGTH)
     thumbnail = models.ImageField(
-        upload_to="movie_thumbnails/", blank=True, default="static/movie_icon.png"
+        upload_to="movie_thumbnails/",
+        blank=True,
+        default="movie_icon.png",
     )
     rating = models.IntegerField(default=0)  # likes
     year = models.IntegerField(default=2021)

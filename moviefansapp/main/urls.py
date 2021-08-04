@@ -1,6 +1,8 @@
 from django.conf.urls import include, url
 from django.urls import path
 from main import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 app_name = "main"
 
@@ -18,4 +20,4 @@ urlpatterns = [
     path("search/", views.search, name="search"),
     path("add_comment/", views.add_comment, name="add_comment"),
     path("upvote_comment/", views.upvote_comment, name="upvote_comment"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
