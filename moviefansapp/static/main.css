@@ -1,2 +1,16 @@
 body {background-color: rgb(255, 255, 255);}
 
+#logoleft {
+  color: black;
+  font-family: 'Indie Flower';
+  font-size: 600%;
+  font-weight: bold;
+}
+
+#logoright {
+  color: #3e8b9e;
+  font-family: 'Indie Flower';
+  font-size: 600%;
+  font-weight: bold;
+}
+
