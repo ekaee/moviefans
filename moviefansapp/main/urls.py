@@ -12,6 +12,9 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("logout/", views.logout, name="logout"),
     path("register/", views.register, name="register"),
-    path("add_movie", views.add_movie, name="add_movie"),
-    url(r"^likepost/$", views.likePost, name="likepost"),
+    path("add_movie/", views.add_movie, name="add_movie"),
+    path("likeMovie/", views.likeMovie, name="likemovie"),
+    path("search/", views.search, name="search"),
+    path("add_comment/", views.add_comment, name="add_comment"),
+    path("upvote_comment/", views.upvote_comment, name="upvote_comment"),
 ]
