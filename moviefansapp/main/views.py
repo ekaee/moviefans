@@ -26,6 +26,7 @@ def about(request):
     return HttpResponse("About")
 
 
+# Single Movie Detail
 def movie(request, movie_slug):
     context = {}
 
@@ -38,6 +39,10 @@ def movie(request, movie_slug):
     return render(
         request, "main/movie.html", context=context
     )  # TODO: check template name
+
+
+def movie_list(request):
+    return render(request, "main/movielist.html")
 
 
 def genre(request, genre_slug):  # genre detail page
