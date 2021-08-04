@@ -12,7 +12,7 @@ from django.db.models import Q
 def index(request):
     movies_most_viewed = Movie.objects.order_by("-views")[:5]
     movies_top_rated = Movie.objects.order_by("-rating")[:5]
-    genre_list = Genre.objects.all().order_by("word")
+    genre_list = Genre.objects.all().order_by("name")
 
     context = {}
     context["movies_most_viewed"] = movies_most_viewed
