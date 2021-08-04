@@ -17,7 +17,7 @@
         col-xs-12
       "
     >
-      <h2>Movie Name</h2>
+      <h2>{{movie.name}}</h2>
     </div>
   </div>
 
@@ -36,15 +36,14 @@
         col-xs-12
       "
     >
-      Year:
+      Year: {{movie.year}}
 
       <br />
-      Duration:
     </div>
 
     <div class="card float-right" style="width: 18rem">
       <div class="card-header">
-        Rating: &nbsp; Views: &nbsp;
+        Rating: {{movie.rating}} &nbsp; Views: {{movie.views}} &nbsp;
         <a
           id="upvotebutton"
           class="btn btn-primary my-2 my-sm-0"
@@ -95,13 +94,7 @@
     >
       <h5>Description</h5>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        {{movie.description}}
       </p>
     </div>
 
@@ -119,17 +112,6 @@
         col-xs-12
       "
     >
-      <img
-        src="https://i.imgur.com/H6Si15m.gif"
-        class="img-fluid"
-        alt="Movie Picture 1"
-      />
-      <br /><br />
-      <img
-        src="https://i.imgur.com/yF21lqu.png"
-        class="img-fluid"
-        alt="Movie Picture 2"
-      />
     </div>
   </div>
 
