@@ -44,3 +44,7 @@ def horror(request):
     
 def scifi(request):
     return render(request, 'main/genre_scifi.html',)
+    
+    
+def movielist(request):
+    return render(request, 'main/movielist.html',)

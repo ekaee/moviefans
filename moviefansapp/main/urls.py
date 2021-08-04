@@ -18,5 +18,6 @@ urlpatterns = [
     path('fantasy/', views.fantasy, name='fantasy'),
     path('horror/', views.horror, name='horror'),
     path('scifi/', views.scifi, name='scifi'),
+    path('movielist/', views.movielist, name='movielist'),
     
 ]
