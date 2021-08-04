@@ -43,7 +43,27 @@ def populate():
     ]
 
     genres = [
-        {"name": "Action"},
-        {"name": "Horror"},
-        {"name": "Comedy"},
+        {"name": "Action", "pages": action_movies},
+        {"name": "Horror", "pages": horror_movies},
+        {"name": "Comedy", "pages": comedy_movies},
     ]
+
+    for gx in genres:
+        g = add_genre(gx['name'])
+        for mx in gx['pages']:
+            add_movie(g, mx['name'], mx['description'])
+
+
+
+def add_genre(name):
+    g = Genre.objects.get_or_create(name=name)[0]
+    g.save()
+    return g
+
+def add_movie(genre, name, description):
+    m = Movie.objects.get_or_create(genre_id=genre, name=name, description=description)[0]
+    m.save()
+    return m
+
+if __name__ == '__main__':
+    populate()
