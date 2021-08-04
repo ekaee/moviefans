@@ -41,9 +41,9 @@ Home
 <br><br>
     <form action="{% url 'main:search' %}" method="post" class="form-inline">
     {% csrf_token %}
-      <input class="form-control mr-sm-4 col-md-8" type="search" placeholder="Search Movie" aria-label="Search">
-      <button class="btn btn-primary" type="submit">Search</button>
+      <input class="form-control mr-sm-4 col-md-8" type="search" name="query_name" placeholder="Search Movie" aria-label="Search">
 
+      <button class="btn btn-primary" type="submit">Search</button>
 
 </div>
 </div>

@@ -32,7 +32,7 @@
         {% for movie in genre_movies %}
         
           <div class="card" style="">
-            <img class="card-img-top" src="#" />
+            <img class="card-img-top" src="{{movie.thumbnail.url}}" />
             <div class="card-body">
               <h5 class="card-text">{{move.name}}</h5>
               <p class="card-text">{{movie.description}}</p>

@@ -27,31 +27,20 @@
         debug: bootstrap screen size: lg
       </div>
       <div class="d-none d-xl-block">debug: bootstrap screen size: xl</div>
-      <h4>Search Results</h4>
-      <div class="card" style="">
-        <img class="card-img-top" src="#" />
-        <div class="card-body">
-          <h5 class="card-text">Movie Name</h5>
-          <p class="card-text">Movie Description</p>
+      <h4>Search Results for "{{query}}"</h4>
+
+      {% for movie in results %}
+        <div class="card" style="">
+          <img class="card-img-top" src="{{movie.thumbnail.url}}" />
+          <div class="card-body">
+            <h5 class="card-text">{{movie.name}}</h5>
+            <p class="card-text">{{movie.description}}</p>
+          </div>
         </div>
-      </div>
-      <br /><br />
-      <div class="card" style="">
-        <img class="card-img-top" src="#" />
-        <div class="card-body">
-          <h5 class="card-text">Movie Name</h5>
-          <p class="card-text">Movie Description</p>
-        </div>
-      </div>
-      <br /><br />
-      <div class="card" style="">
-        <img class="card-img-top" src="#" />
-        <div class="card-body">
-          <h5 class="card-text">Movie Name</h5>
-          <p class="card-text">Movie Description</p>
-        </div>
-      </div>
-      <br /><br />
+        <br /><br />
+      {% endfor %}
+      
+
     </div>
   </div>
 </div>

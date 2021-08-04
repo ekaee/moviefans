@@ -123,13 +123,13 @@ def logout(request):
 
 
 def search(request):
-    query = request.GET.get("q", "")
+    query = request.POST.get("query_name")
     if query:
         queryset = Q(name__icontains=query)
         results = Movie.objects.filter(queryset).distinct()
     else:
         results = []
-    return render(request, "search.html", {"results": results, "query": query})
+    return render(request, "main/search.html", {"results": results, "query": query})
 
 
 @login_required
