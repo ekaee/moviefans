@@ -37,10 +37,10 @@ class Movie(models.Model):
     thumbnail = models.ImageField(
         upload_to="movie_thumbnails/", blank=True, default="static/movie_icon.png"
     )
-    rating = models.IntegerField()  # likes
-    year = models.IntegerField()
+    rating = models.IntegerField(default=0)  # likes
+    year = models.IntegerField(default=2021)
     slug = models.SlugField(unique=True)
-    views = models.IntegerField()
+    views = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
