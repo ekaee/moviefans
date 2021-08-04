@@ -1,8 +1,8 @@
-from moviefansapp.main.models import Movie
+from main.models import Movie
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from models import Genre, Movie
-from forms import UserForm, UserProfileForm
+from main.models import Genre, Movie
+from main.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.db.models import fields
-from models import Movie, UserProfile
+from main.models import Movie, UserProfile
 
 
 class UserForm(forms.ModelForm):
@@ -19,7 +19,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = "picture"
+        fields = ("picture", )
 
 
 class AddMovieForm(forms.ModelForm):
