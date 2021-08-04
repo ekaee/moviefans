@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import default, slugify
 from django.contrib.auth.models import User
+from django.urls.base import reverse
 
 NAME_MAX_LENGTH = 128
 CONTENT_MAX_LENGTH = 2000
@@ -23,6 +24,9 @@ class Genre(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Genre, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("main:genre", args=[str(self.slug)])
 
     def __str__(self):
         return self.name
