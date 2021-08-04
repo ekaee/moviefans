@@ -51,37 +51,29 @@ Home
 
 <div class="row">
 <div class="offset-xl-3 col-xl-3 offset-lg-2 col-lg-4 offset-md-3 col-md-4 offset-sm-0 col-sm-12 offset-xs-4 col-xs-4">
-Most Upvoted
+<!-- Most View -->
 <div class="card">
   <div class="card-header">
-    Categories
+    Most Viewed Movies
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">1</li>
-    <li class="list-group-item">2</li>
-    <li class="list-group-item">3</li>
-    <li class="list-group-item">4</li>
-    <li class="list-group-item">5</li>
-    <li class="list-group-item">6</li>
-    <li class="list-group-item">7</li>
+    {% for movie in movies_most_viewed %}
+    <li class="list-group-item"><a href="{{ movie.get_absolute_url }}">{{movie.name}}</a></li>
+    {% endfor %}
   </ul>
 </div>
 </div>
 
 <div class="offset-xl-2 col-xl-3 offset-lg-2 col-lg-4 offset-md-1 col-md-4 offset-sm-0 col-sm-12 offset-xs-4 col-xs-4">
-Most Viewed
+<!-- Most Upvote -->
 <div class="card">
   <div class="card-header">
-    Categories
+    Most Upvoted Movies
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">1</li>
-    <li class="list-group-item">2</li>
-    <li class="list-group-item">3</li>
-    <li class="list-group-item">4</li>
-    <li class="list-group-item">5</li>
-    <li class="list-group-item">6</li>
-    <li class="list-group-item">7</li>
+    {% for movie in movies_top_rated %}
+    <li class="list-group-item"><a href="{{ movie.get_absolute_url }}">{{movie.name}}</a></li>
+    {% endfor %}
   </ul>
 </div>
 </div>

@@ -50,6 +50,9 @@ class Movie(models.Model):
         self.slug = slugify(self.name)
         super(Movie, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse("main:movie", args=[str(self.slug)])
+
     def __str__(self):
         return self.name
 
