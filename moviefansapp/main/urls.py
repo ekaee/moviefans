@@ -1,3 +1,4 @@
+from django.conf.urls import include, url
 from django.urls import path
 from main import views
 
@@ -12,4 +13,5 @@ urlpatterns = [
     path("logout/", views.logout, name="logout"),
     path("register/", views.register, name="register"),
     path("add_movie", views.add_movie, name="add_movie"),
+    url(r"^likepost/$", views.likePost, name="likepost"),
 ]

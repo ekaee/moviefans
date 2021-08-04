@@ -128,3 +128,15 @@ def add_movie(request):
 
 def search(request):
     return HttpResponse("Search")
+
+
+def likeMovie(request):
+    if request.method == "GET":
+        movie_slug = request.GET["movie_slug"]
+        likedMovie = Movie.objects.get(slug=movie_slug)
+        # m = Like(post=likedpost)
+        likedMovie.rating += 1
+        likedMovie.save()
+        return HttpResponse("Success!")
+    else:
+        return HttpResponse("Request method is not a GET")
