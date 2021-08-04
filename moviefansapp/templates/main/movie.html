@@ -44,13 +44,20 @@
     <div class="card float-right" style="width: 18rem">
       <div class="card-header">
         Rating: {{movie.rating}} &nbsp; Views: {{movie.views}} &nbsp;
-        <a
+
+        <form action="{% url 'main:like_movie' %}" method="POST" class="form">
+          <input class="form-control mr-sm-4 col-md-8" type="hidden" name="query_name" value="{{movie.slug}}"/>
+          {% csrf_token %}
+        <button
           id="upvotebutton"
+          type="submit"
           class="btn btn-primary my-2 my-sm-0"
           href="#"
           role="button"
-          >Like</a
-        >
+          >
+          Like
+        </button>
+        </form>
       </div>
     </div>
   </div>

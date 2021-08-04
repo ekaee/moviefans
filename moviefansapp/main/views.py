@@ -132,16 +132,19 @@ def search(request):
     return render(request, "main/search.html", {"results": results, "query": query})
 
 
-@login_required
+# @login_required
 def likeMovie(request):
-    if request.method == "GET":
-        movie_slug = request.GET["movie_slug"]
-        likedMovie = Movie.objects.get(slug=movie_slug)
-        likedMovie.rating += 1
-        likedMovie.save()
-        return HttpResponse("Success!")
+    query = request.POST.get("query_name")
+    if query:
+        queryset = Q(slug__icontains=query)
+        results = Movie.objects.filter(queryset).distinct()
+        if results[0]:
+            likedMovie = results[0]
+            likedMovie.rating += 1
+            likedMovie.save()
     else:
-        return HttpResponse("Request method is not a GET")
+        results = []
+    return redirect(reverse("main:index"))
 
 
 @login_required
