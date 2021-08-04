@@ -1,5 +1,5 @@
 from django.db import models
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import default, slugify
 from django.contrib.auth.models import User
 
 NAME_MAX_LENGTH = 128
@@ -34,7 +34,9 @@ class Movie(models.Model):
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
     genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
     description = models.CharField(max_length=CONTENT_MAX_LENGTH)
-    thumbnail = models.ImageField(upload_to="movie_thumbnails/", blank=True)
+    thumbnail = models.ImageField(
+        upload_to="movie_thumbnails/", blank=True, default="static/movie_icon.png"
+    )
     rating = models.IntegerField()  # likes
     year = models.IntegerField()
     slug = models.SlugField(unique=True)
@@ -50,7 +52,7 @@ class Movie(models.Model):
 
 class Comments(models.Model):
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    content = models.CharField(max_length=CONTENT_MAX_LENGTH)  # comment
+    content = models.CharField(max_length=CONTENT_MAX_LENGTH, default="")  # comment
     user_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
-    upvote = models.IntegerField()
+    upvote = models.IntegerField(default=0)

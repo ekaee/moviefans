@@ -1,11 +1,12 @@
-from main.models import Movie
+from main.models import Comments, Movie, UserProfile
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from main.models import Genre, Movie
-from main.forms import UserForm, UserProfileForm
+from main.forms import AddMovieForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def index(request):
@@ -120,23 +121,83 @@ def logout(request):
     return redirect(reverse("main:index"))
 
 
-# TODO: add movie page
-@login_required
-def add_movie(request):
-    return
-
-
 def search(request):
-    return HttpResponse("Search")
+    query = request.GET.get("q", "")
+    if query:
+        queryset = Q(name__icontains=query)
+        results = Movie.objects.filter(queryset).distinct()
+    else:
+        results = []
+    return render(request, "search.html", {"results": results, "query": query})
 
 
+@login_required
 def likeMovie(request):
     if request.method == "GET":
         movie_slug = request.GET["movie_slug"]
         likedMovie = Movie.objects.get(slug=movie_slug)
-        # m = Like(post=likedpost)
         likedMovie.rating += 1
         likedMovie.save()
         return HttpResponse("Success!")
     else:
         return HttpResponse("Request method is not a GET")
+
+
+@login_required
+def add_comment(request):
+    if request.user.is_authenticated():
+        user = request.user
+        profile = UserProfile.objects.get(user=user)
+
+        if request.method == "POST":
+            movie_id = request.POST.get("movie_id")
+            movie = Movie.objects.get(movie_id=movie_id)
+            content = request.POST.get("content")
+
+            comment = Comments()
+            comment.user_id = profile
+            comment.movie_id = movie
+            comment.content = content
+            comment.save()
+
+            return HttpResponse("Success!")
+
+    return HttpResponse("Add comment request failed.")
+
+
+@login_required
+def upvote_comment(request):
+    if request.user.is_authenticated():
+        if request.method == "POST":
+            comment_id = request.POST.get("comment_id")
+            comment = Comments.objects.get(id=comment_id)
+            comment.upvote += 1
+            comment.save()
+            return HttpResponse("Upvote Success!")
+
+    return HttpResponse("Upvote comment request failed.")
+
+
+@login_required
+def add_movie(request):
+    if request.method == "POST":
+        movie_form = AddMovieForm(request.POST)
+
+        if movie_form.is_valid():
+            newMovie = movie_form.save(commit=False)
+
+            newMovie.save()
+        else:
+            print(movie_form.errors)
+    else:
+        movie_form = AddMovieForm()
+
+    # return render(
+    #     request,
+    #     "main/index.html",
+    #     context={
+    #         "movie_form": movie_form,
+    #     },
+    # )
+
+    return redirect(reverse("main:index"))
