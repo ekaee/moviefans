@@ -32,16 +32,31 @@
           debug: bootstrap screen size: lg
         </div>
         <div class="d-none d-xl-block">debug: bootstrap screen size: xl</div>
-        <h4>Search Results</h4>
-        <div class="card">
-          <img class="card-img-top" src="#" />
-          <div class="card-body">
-            <h5 class="card-text">
-              <a href="{% url 'main:movie_list' %}">Movie Name</a>
-            </h5>
-            <p class="card-text">Movie Description</p>
-          </div>
-        </div>
+        <h4>All Movies</h4>
+        
+              {% for movie in movies %}
+              <div class="col-md-3 col-sm-6">
+                <div class="card">
+                  <div class="movie-grid">
+                    <div class="image">
+                      <a href="#" class="image">
+                        <img class="card-img-top" src="{{movie.thumbnail.url}}" />
+                        <div class="grid-info">
+                          <ul class="rating"></ul>
+                        </div>
+                      </a>
+                    </div>
+                    <h5 class="movie-rating">Upvotes: {{ movie.rating }}</a></h5>
+                    <div class="movie">
+                      <h3 class="title"><a href="#">{{ movie.name }}</a></h3>
+                      <p class="card-text">{{movie.description}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+
       </div>
     </div>
   </div>
