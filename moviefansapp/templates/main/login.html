@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
 <br><br><br><br>
-<div class="row">
+<div class="row" style="max-width: 1920px;">
     <div class="offset-xl-0 col-xl-0 offset-lg-0 col-lg-4"></div>
     <aside class="col-sm-4">
         <div class="card">
@@ -28,6 +28,12 @@
                     </div>                                             
                 </div>                                                                
             </form>
+            {% if error %}
+            <hr>
+            <p>
+                <button href="#" class="btn btn-block btn-outline-danger disabled">{{error}}</button> <!--just test-->
+            </p>
+            {% endif %}
             </article>
         </div> <!-- card.// -->
     </aside>

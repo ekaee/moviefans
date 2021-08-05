@@ -86,21 +86,33 @@ def register(request):
             login(request, user)
             messages.success(request, "Registration successful.")
 
+            return redirect(reverse("main:index"))
+
         else:
             print(user_form.errors, profile_form.errors)
+
+            return render(
+            request,
+            "main/register.html",
+            context={
+                "user_form": user_form,
+                "profile_form": profile_form,
+                "registered": registered,
+            },
+        )
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    return render(
-        request,
-        "main/register.html",
-        context={
-            "user_form": user_form,
-            "profile_form": profile_form,
-            "registered": registered,
-        },
-    )
+        return render(
+            request,
+            "main/register.html",
+            context={
+                "user_form": user_form,
+                "profile_form": profile_form,
+                "registered": registered,
+            },
+        )
 
 
 # TODO: Check URLs
@@ -118,10 +130,13 @@ def login_page(request):
                 return redirect(reverse("main:index"))
             else:
                 messages.error(request, "Invalid username or password.")
+                return render(request, "main/login.html", context={"login_form": form, "error": "Invalid Input"})
         else:
             messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request, "main/login.html", context={"login_form": form})
+            return render(request, "main/login.html", context={"login_form": form, "error": "Invalid Input"})
+    else:
+        form = AuthenticationForm()
+        return render(request, "main/login.html", context={"login_form": form})
 
 
 @login_required
