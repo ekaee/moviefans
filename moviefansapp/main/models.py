@@ -2,6 +2,9 @@ from django.db import models
 from django.template.defaultfilters import default, slugify
 from django.contrib.auth.models import User
 from django.urls.base import reverse
+from django.conf import settings
+from django.contrib.auth import get_user_model
+
 
 NAME_MAX_LENGTH = 128
 CONTENT_MAX_LENGTH = 2000
@@ -62,6 +65,13 @@ class Movie(models.Model):
 class Comments(models.Model):
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     content = models.CharField(max_length=CONTENT_MAX_LENGTH, default="")  # comment
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        default=None,
+        blank=True,
+        null=True,
+    )
+    username = models.CharField(default="Unknown User", max_length=20)
     time = models.DateTimeField(auto_now_add=True)
     upvote = models.IntegerField(default=0)

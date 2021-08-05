@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 
 
 def index(request):
@@ -163,16 +164,24 @@ def add_comment(request):
         if user is None:
             return HttpResponse("Could not get user from request.")
 
+        if hasattr(user, "_wrapped") and hasattr(user, "_setup"):
+            if user._wrapped.__class__ == object:
+                user._setup()
+            user = user._wrapped
+
         if request.method == "POST":
-            movie_id = request.POST.get("movie_slug")
-            movie = Movie.objects.get(slug=movie_id)
+            movie_slug = request.POST.get("movie_slug")
+            movie = Movie.objects.get(slug=movie_slug)
+
             if movie is not None:
                 content = request.POST.get("content")
 
                 comment = Comments.objects.create(
-                    movie_id=movie, content=content, user_id=get_user(request)
+                    movie_id=movie,
+                    content=content,
+                    username=user.username,
+                    user_id=user,
                 )
-                comment.save()
 
             return HttpResponse("Success!")
 
