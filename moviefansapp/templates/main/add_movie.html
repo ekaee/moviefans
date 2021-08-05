@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %} 
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title_block %} 
+Add New Movie
+{% endblock %} 
+
+{% block body_block %}
+<div class="container-fluid">
+
+    <div class="row">
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ movie_form|crispy }}
+                    
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block"> Add </button>
+                                </div>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <a class="btn btn-primary float-right" href="{% url 'main:index' %}" role="button">Back</a>
+                            </div>
+                        </div>
+                    </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

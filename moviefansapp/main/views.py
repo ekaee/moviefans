@@ -83,19 +83,9 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-            # user.set_password(user.password)
-            # user.save()
             login(request, user)
             messages.success(request, "Registration successful.")
 
-            # profile = profile_form.save(commit=False)
-            # profile.user = user
-
-            # if "picture" in request.FILES:
-            #     profile.picture = request.FILES["picture"]
-
-            # profile.save()
-            # registered = True
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -211,28 +201,15 @@ def upvote_comment(request):
 
 
 @login_required
-def add_movie(request):
+def add_movie_page(request):
     if request.method == "POST":
-        movie_form = AddMovieForm(request.POST)
+        movie_form = AddMovieForm(request.POST, request.FILES)
 
         if movie_form.is_valid():
-            newMovie = movie_form.save(commit=False)
+            newMovie = movie_form.save()
 
-            newMovie.save()
-        else:
-            print(movie_form.errors)
-    else:
-        movie_form = AddMovieForm()
-
-    # return render(
-    #     request,
-    #     "main/index.html",
-    #     context={
-    #         "movie_form": movie_form,
-    #     },
-    # )
-
-    return redirect(reverse("main:index"))
+    movie_form = AddMovieForm()
+    return render(request, "main/add_movie.html", context={"movie_form": movie_form})
 
 
 def add_view(request):
