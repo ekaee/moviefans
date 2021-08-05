@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from models import Movie
+from .models import Movie
 
 # Create your tests here.
 
@@ -30,10 +30,11 @@ class CinemaPagesTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
     
     def test_search(self):
-        response = self.client.post('/search/', {'q': 'big'})
+        response = self.client.post('/search/', {'q': 'action'})
         self.failUnlessEqual(response.status_code, 200)
 
+# something wrong with this test
     def test_genre(self):
-        response = self.client.get('/genre/action')
+        response = self.client.get('genre/comedy')
         self.assertIn(response.status_code, (301, 302))
 
