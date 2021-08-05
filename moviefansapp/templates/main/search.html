@@ -1,32 +1,26 @@
-{% extends 'main/base.html' %} {% load static %} {% block title_block %} Search
-{% endblock %} {% block body_block %}
-<div class="container-fluid">
-  <h4>Search Results for "{{query}}"</h4>
-  <div class="row">
+{% extends 'main/base.html' %}
+{% load static %}
 
+{% block title_block %} Search {% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+  <div class="cate">
+    <p class="logo movielist-logo"><span class="color-darkgray">Search for: </span><span class="color-blue">{{query}}</span></p>
+    <div class="movies">
       {% for movie in results %}
-      <div class="col-md-3 col-sm-6">
-        <div class="card">
-            <div class="movie-grid">
-              <div class="image">
-                <a href="#" class="image">
-                  <img class="card-img-top" src="{{movie.thumbnail.url}}" />
-                  <div class="grid-info">
-                    <ul class="rating"></ul>
-                  </div>
-                </a>
-              </div>
-              <h5 class="movie-rating">Upvotes: {{ movie.rating }}</a></h5>
-              <div class="movie">
-                <h3 class="title"><a href="#">{{ movie.name }}</a></h3>
-                <p class="card-text">{{movie.description}}</p>
-              </div>
-            </div>
+      <div class="card-custom">
+        <a href="{{movie.get_absolute_url}}">
+          <div class="pic">
+            <img src="{{movie.thumbnail.url}}">
+            <div class="rating">{{movie.rating}} ⭐</div>
           </div>
+        </a>
+        <div class="text">{{movie.name}}</div>
       </div>
       {% endfor %}
-      
-
+    </div>
   </div>
 </div>
 

@@ -7,10 +7,7 @@
 {% block body_block %}
 <div class="container">
   <div class="cate">
-    <p class="logo movielist-logo"><span class="color-darkgray">Movie</span><span class="color-blue">List</span>
-      
-      <a class="float-right btn btn-outline-primary" href="{% url 'main:add_movie_page' %}">Add Movie</a>
-    </p>
+    <p class="logo movielist-logo"><span class="color-darkgray">Movie</span><span class="color-blue">List</span></p>
 
     <div class="movies">
       {% for movie in movies %}
