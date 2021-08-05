@@ -62,6 +62,6 @@ class Movie(models.Model):
 class Comments(models.Model):
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     content = models.CharField(max_length=CONTENT_MAX_LENGTH, default="")  # comment
-    user_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
     upvote = models.IntegerField(default=0)

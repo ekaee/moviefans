@@ -159,13 +159,12 @@ Movie
         col-xs-12
       ">
       <form action="{% url 'main:add_comment' %}" method="POST" class="form">
-        <input class="form-control mr-sm-4 col-md-8" type="hidden" name="movie_id" value="{{movie.slug}}" />
+        {% csrf_token %}
+        <input class="form-control mr-sm-4 col-md-8" type="hidden" name="movie_slug" value="{{movie.slug}}" />
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"
           placeholder="Type your comment here..."></textarea>
-        {% csrf_token %}
-        <button id="upvotebutton" type="submit" class="btn btn-primary my-2 my-sm-0" href="#" role="button">
-          Comment!
-        </button>
+        <input class="btn btn-primary col-auto" type="submit" value="Comment"></input>
+
       </form>
     </div>
   </div>

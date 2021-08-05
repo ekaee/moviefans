@@ -3,12 +3,13 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from main.models import Genre, Movie
 from main.forms import AddMovieForm, UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -156,20 +157,22 @@ def likeMovie(request):
 
 @login_required
 def add_comment(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user = request.user
-        profile = UserProfile.objects.get(user=user)
+
+        if user is None:
+            return HttpResponse("Could not get user from request.")
 
         if request.method == "POST":
-            movie_id = request.POST.get("movie_id")
-            movie = Movie.objects.get(movie_id=movie_id)
-            content = request.POST.get("content")
+            movie_id = request.POST.get("movie_slug")
+            movie = Movie.objects.get(slug=movie_id)
+            if movie is not None:
+                content = request.POST.get("content")
 
-            comment = Comments()
-            comment.user_id = profile
-            comment.movie_id = movie
-            comment.content = content
-            comment.save()
+                comment = Comments.objects.create(
+                    movie_id=movie, content=content, user_id=get_user(request)
+                )
+                comment.save()
 
             return HttpResponse("Success!")
 
@@ -178,7 +181,7 @@ def add_comment(request):
 
 @login_required
 def upvote_comment(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         if request.method == "POST":
             comment_id = request.POST.get("comment_id")
             comment = Comments.objects.get(id=comment_id)
