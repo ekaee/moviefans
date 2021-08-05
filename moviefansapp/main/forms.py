@@ -34,18 +34,15 @@ class UserProfileForm(forms.ModelForm):
 class AddMovieForm(forms.ModelForm):
     class Meta:
         model = Movie
+        fields = (
+            "name",
+            "genre_id",
+            "description",
+            "thumbnail",
+            "year",
+        )
         exclude = (
             "slug",
             "rating",
             "views",
         )
-
-    # def clean(self):
-    #     cleaned_data = self.cleaned_data
-    #     url = cleaned_data.get("url")
-
-    #     if url and not url.startswith("http://"):
-    #         url = f"http://{url}"
-    #         cleaned_data["url"] = url
-
-    #     return cleaned_data
