@@ -23,7 +23,7 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse("About")
+    return render(request, "main/about.html")
 
 
 # Single Movie Detail
