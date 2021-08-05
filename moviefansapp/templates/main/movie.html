@@ -189,6 +189,14 @@ Movie
         <div class="card-body text-dark">
           <h5 class="card-title">{{ comment.username }}</h5>
           <p class="card-text">{{ comment.content }}</p>
+
+          <form action="{% url 'main:upvote_comment' %}" method="post" class="form-inline">
+            {% csrf_token %}
+            <input class="form-control mr-1 col-10" type="hidden" name="comment_id" value="{{comment.id}}">
+            <input class="btn btn-primary col-auto" type="submit" value="Upvote {{comment.upvote}}"></input>
+          </form>
+
+
         </div>
       </div>
       {% endfor %}
