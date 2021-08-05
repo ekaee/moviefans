@@ -32,9 +32,12 @@ def movie(request, movie_slug):
 
     try:
         movie = Movie.objects.get(slug=movie_slug)
+        # comments = Comments.objects.get(movie_id=movie)
         context["movie"] = movie
+        # context["comments"] = comments
     except:
         context["movie"] = None
+        # context["comments"] = None
 
     return render(request, "main/movie.html", context=context)
 
@@ -144,7 +147,7 @@ def likeMovie(request):
             likedMovie.save()
     else:
         results = []
-    return redirect(reverse("main:index"))
+    return redirect("/movie/"+query)
 
 
 @login_required

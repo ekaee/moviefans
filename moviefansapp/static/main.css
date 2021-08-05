@@ -1,18 +1,41 @@
-body {background-color: rgb(255, 255, 255);}
-
-#logoleft {
-  color: #454546;
-  font-family: 'Indie Flower';
-  font-size: 600%;
-  font-weight: bold;
-  text-shadow: 1px 1px;
+body {
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  min-height: 100vh;
 }
 
-#logoright {
-  color: #4187cc;
+.logo {
   font-family: 'Indie Flower';
-  font-size: 600%;
+  font-size: 1.5em;
   font-weight: bold;
-  text-shadow: 1px 1px;
+}
+
+.color-darkgray {
+  color: #454546;
+}
+
+.color-blue {
+  color: #4187cc;
+}
+
+.main-logo {
+  font-size: 5em !important;
+  text-shadow: 1px 1px ;
+}
+
+.search-index {
+  padding: 10vh 0;
+}
+
+.search-box {
+  max-width: 500px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.nav-custom-class {
+  margin-top: 20px;
+  border-radius: 10px;
+  padding-top: 20px;
 }
 

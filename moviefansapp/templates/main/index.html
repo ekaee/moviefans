@@ -1,88 +1,110 @@
-{% extends 'main/base.html' %} 
-{% load static %} 
+{% extends 'main/base.html' %}
+{% load static %}
 
-{% block title_block %} 
-Home 
-{% endblock %} 
+{% block title_block %}
+Home
+{% endblock %}
 
 {% block body_block %}
 
-
-
 <div class="container-fluid">
-<div class="row">
-<div class="offset-xl-0 col-xl-2 offset-lg-0 col-lg-2 offset-md-0 col-md-3 offset-sm-0 col-sm-12 offset-xs-0 col-xs-12">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar nav-custom-class">
+      <div class="sidebar-sticky" id="categories-listing">
+        <h5>Genres</h5>
+        <ul class="nav flex-column">
 
-<div class="d-sm-none">debug: bootstrap screen size: xs</div>
-<div class="d-none d-sm-block d-md-none d-lg-none d-xl-none">debug: bootstrap screen size: sm</div>
-<div class="d-none d-md-block d-lg-none d-xl-none">debug: bootstrap screen size: md</div>
-<div class="d-none d-lg-block d-xl-none">debug: bootstrap screen size: lg</div>
-<div class="d-none d-xl-block">debug: bootstrap screen size: xl</div>
+          {% for genre in genre_list %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ genre.get_absolute_url }}">
+              <span></span>{{genre.name}}
+            </a>
+          </li>
+          {% endfor %}
 
-<div class="card">
-  <div class="card-header">
-    Categories
-  </div>
-  <ul class="list-group list-group-flush">
-    {% for genre in genre_list %}
-      <li class="list-group-item"><a href="{{ genre.get_absolute_url }}">{{genre.name}}</a></li>
-    {% endfor %}
-  </ul>
-</div>
+        </ul>
+      </div>
+    </nav>
 
-</div>
+    <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
 
+      <div class="search-index">
+        <div class="search-box">
 
+          <p class="logo main-logo"><span class="color-darkgray">movie</span><span class="color-blue">fans</span></p>
+          <form action="{% url 'main:search' %}" method="post" class="form-inline">
+            {% csrf_token %}
+            <input class="form-control mr-1 col-10" type="search" name="query_name" placeholder="Search Movie"
+              aria-label="Search">
+            <input class="btn btn-primary col-auto" type="submit" value="Search"></input>
+          </form>
 
-<div class="offset-xl-0 col-xl-10 offset-lg-0 col-lg-10 offset-md-0 col-md-8 offset-sm-0 col-sm-12 offset-xs-4 col-xs-4">
-<div class="offset-xl-3 col-xl-6 offset-lg-3 col-lg-6 offset-md-3 col-md-12 offset-sm-4 col-sm-12 offset-xs-4 col-xs-4">
+        </div>
+      </div>
 
-<span id="logoleft">movie</span><span id="logoright">fans</span>
-<br><br>
-    <form action="{% url 'main:search' %}" method="post" class="form-inline">
-    {% csrf_token %}
-      <input class="form-control mr-sm-4 col-md-8" type="search" name="query_name" placeholder="Search Movie" aria-label="Search">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-6">
+              <div class="card-body">
+                <h2>Top Rated Movies</h2>
+                <p class="card-text">
 
-      <button class="btn btn-primary" type="submit">Search</button>
-    </form>
+                <ul class="list-group">
+                  {% for movie in movies_top_rated %}
+                  <li class="list-group-item"><a href="{{ movie.get_absolute_url }}">{{movie.name}}</a></li>
+                  {% endfor %}
 
-</div>
-</div>
-</div>
+                </ul>
 
-<div class="row">
-<div class="offset-xl-3 col-xl-3 offset-lg-2 col-lg-4 offset-md-3 col-md-4 offset-sm-0 col-sm-12 offset-xs-4 col-xs-4">
-<!-- Most View -->
-<div class="card">
-  <div class="card-header">
-    Most Viewed Movies
-  </div>
-  <ul class="list-group list-group-flush">
-    {% for movie in movies_most_viewed %}
-    <li class="list-group-item"><a href="{{ movie.get_absolute_url }}">{{movie.name}}</a></li>
-    {% endfor %}
-  </ul>
-</div>
-</div>
+                </p>
+              </div>
+            </div>
+          </div>
 
-<div class="offset-xl-2 col-xl-3 offset-lg-2 col-lg-4 offset-md-1 col-md-4 offset-sm-0 col-sm-12 offset-xs-4 col-xs-4">
-<!-- Most Upvote -->
-<div class="card">
-  <div class="card-header">
-    Most Upvoted Movies
-  </div>
-  <ul class="list-group list-group-flush">
-    {% for movie in movies_top_rated %}
-    <li class="list-group-item"><a href="{{ movie.get_absolute_url }}">{{movie.name}}</a></li>
-    {% endfor %}
-  </ul>
-</div>
-</div>
+          <div class="col-md-6">
+            <div class="card mb-6">
+              <div class="card-body">
+                <h2>Most Viewed Movies</h2>
+                <p class="card-text">
+                <ul class="list-group">
+                  {% for movie in movies_most_viewed %}
+                  <li class="list-group-item"><a href="{{ movie.get_absolute_url }}">{{movie.name}}</a></li>
+                  {% endfor %}
+                </ul>
 
-</div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- 
 
+  <div class="categories">
+    <div class="categories-margin">
 
+      
 
-</div>
-{% endblock %}
+      <div class="card card-margin">
+        <div class="card-header">
+          Most Viewed Movies
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for movie in movies_most_viewed %}
+          <li class="list-group-item"><a href="{{ movie.get_absolute_url }}">{{movie.name}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="card card-margin">
+        <div class="card-header">
+          Most Upvoted Movies
+        </div>
+        <ul class="list-group list-group-flush">
+          
+        </ul>
+      </div>
+    </div> -->
+      {% endblock %}

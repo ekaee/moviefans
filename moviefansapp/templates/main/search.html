@@ -1,47 +1,32 @@
 {% extends 'main/base.html' %} {% load static %} {% block title_block %} Search
 {% endblock %} {% block body_block %}
 <div class="container-fluid">
+  <h4>Search Results for "{{query}}"</h4>
   <div class="row">
-    <div
-      class="
-        offset-xl-2
-        col-xl-8
-        offset-lg-2
-        col-lg-8
-        offset-md-2
-        col-md-8
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      "
-    >
-      <div class="d-sm-none">debug: bootstrap screen size: xs</div>
-      <div class="d-none d-sm-block d-md-none d-lg-none d-xl-none">
-        debug: bootstrap screen size: sm
-      </div>
-      <div class="d-none d-md-block d-lg-none d-xl-none">
-        debug: bootstrap screen size: md
-      </div>
-      <div class="d-none d-lg-block d-xl-none">
-        debug: bootstrap screen size: lg
-      </div>
-      <div class="d-none d-xl-block">debug: bootstrap screen size: xl</div>
-      <h4>Search Results for "{{query}}"</h4>
 
       {% for movie in results %}
-        <div class="card" style="">
-          <img class="card-img-top" src="{{movie.thumbnail.url}}" />
-          <div class="card-body">
-            <h5 class="card-text">{{movie.name}}</h5>
-            <p class="card-text">{{movie.description}}</p>
+      <div class="col-md-3 col-sm-6">
+        <div class="card">
+            <div class="movie-grid">
+              <div class="image">
+                <a href="#" class="image">
+                  <img class="card-img-top" src="{{movie.thumbnail.url}}" />
+                  <div class="grid-info">
+                    <ul class="rating"></ul>
+                  </div>
+                </a>
+              </div>
+              <h5 class="movie-rating">Upvotes: {{ movie.rating }}</a></h5>
+              <div class="movie">
+                <h3 class="title"><a href="#">{{ movie.name }}</a></h3>
+                <p class="card-text">{{movie.description}}</p>
+              </div>
+            </div>
           </div>
-        </div>
-        <br /><br />
+      </div>
       {% endfor %}
       
 
-    </div>
   </div>
 </div>
 

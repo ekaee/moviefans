@@ -1,4 +1,5 @@
-{% extends 'main/base.html' %} {% load static %} 
+{% extends 'main/base.html' %}
+{% load static %} 
 {% block title_block %} 
   Movie
 {% endblock %} 
@@ -36,7 +37,7 @@
           <img class="card-img-top" src="#" />
           <div class="card-body">
             <h5 class="card-text">
-              <a href="{% url 'main:movie' %}">Movie Name</a>
+              <a href="{% url 'main:movie_list' %}">Movie Name</a>
             </h5>
             <p class="card-text">Movie Description</p>
           </div>
