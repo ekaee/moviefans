@@ -22,185 +22,72 @@ Movie
       }
     });
   });
-
 </script>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="
-        offset-xl-1
-        col-xl-8
-        offset-lg-1
-        col-lg-8
-        offset-md-0
-        col-md-6
-        offset-sm-0
-        col-sm-6
-        offset-xs-0
-        col-xs-12
-      ">
-      <h2>{{movie.name}}</h2>
+<div class="container">
+  <div class="movie">
+    <div class="movie-pic">
+      <img src="{{movie.thumbnail.url}}">
     </div>
-  </div>
+    <div class="movie-details">
+      <p class="name">
+        {{movie.name}}
+      </p>
 
-  <div class="row">
-    <div class="
-        offset-xl-1
-        col-xl-8
-        offset-lg-1
-        col-lg-2
-        offset-md-0
-        col-md-6
-        offset-sm-0
-        col-sm-6
-        offset-xs-0
-        col-xs-12
-      ">
-      Year: {{movie.year}} ({{movie.genre_id.name}})
+      <p class="genre">
+        <span class="gen">{{movie.genre_id.name}}</span> - {{movie.year}}
+      </p>
+      
+      <p class="desc">
+        {{movie.description}}
+      </p>
 
-      <br />
-    </div>
-
-    <div class="card float-right" style="width: 18rem">
-      <div class="card-header">
-        Rating: {{movie.rating}} &nbsp; Views: {{movie.views}} &nbsp;
-
+      <div class="rating-view">
         <form action="{% url 'main:like_movie' %}" method="POST" class="form">
           <input class="form-control mr-sm-4 col-md-8" type="hidden" name="query_name" value="{{movie.slug}}" />
           {% csrf_token %}
-          <button id="upvotebutton" type="submit" class="btn btn-primary my-2 my-sm-0" href="#" role="button">
-            Like
+          <button id="upvotebutton" type="submit" class="btn btn-outline-dark" role="button">
+            {{movie.rating}} ⭐
           </button>
         </form>
+
+        <button id="upvotebutton" type="submit" class="btn btn-outline-success" role="button">Views: {{movie.views}}</button>
+
       </div>
     </div>
   </div>
-  <br /><br /><br />
 
-  <div class="row">
-    <div class="
-        offset-xl-1
-        col-xl-3
-        offset-lg-1
-        col-lg-3
-        offset-md-0
-        col-md-4
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      ">
-      <img src="{{movie.thumbnail.url}}" class="img-fluid" alt="Movie Poster" />
-    </div>
+  <div class="comments">
+    <div class="comment-box">
 
-    <div class="
-        offset-xl-1
-        col-xl-2
-        offset-lg-1
-        col-lg-3
-        offset-md-0
-        col-md-4
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      ">
-      <h5>Description</h5>
-      <p>
-        {{movie.description}}
-      </p>
-    </div>
 
-    <div class="
-        offset-xl-1
-        col-xl-3
-        offset-lg-1
-        col-lg-3
-        offset-md-0
-        col-md-4
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      ">
-    </div>
-  </div>
 
-  <br /><br />
-  <div class="row">
-    <div class="
-        offset-xl-1
-        col-xl-3
-        offset-lg-1
-        col-lg-3
-        offset-md-0
-        col-md-12
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      ">
-      <h4>Comments</h4>
-      <br /><br />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="
-        offset-xl-1
-        col-xl-10
-        offset-lg-1
-        col-lg-10
-        offset-md-1
-        col-md-10
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      ">
       <form action="{% url 'main:add_comment' %}" method="POST" class="form">
         {% csrf_token %}
         <input class="form-control mr-sm-4 col-md-8" type="hidden" name="movie_slug" value="{{movie.slug}}" />
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"
-          placeholder="Type your comment here..."></textarea>
-        <input class="btn btn-primary col-auto" type="submit" value="Comment"></input>
+          placeholder="Type your comment here ..."></textarea>
+        <button id="upvotebutton" type="submit" class="btn btn-outline-success float-right mt-2" role="button">Comment</button>
 
       </form>
+
+
+
     </div>
-  </div>
-  <br /><br />
-  <div class="row">
-    <div class="
-        offset-xl-1
-        col-xl-10
-        offset-lg-1
-        col-lg-10
-        offset-md-1
-        col-md-10
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      ">
 
+    <div class="user-comments">
       {% for comment in comments %}
-      <div class="card border-dark mb-3">
-        <div class="card-header">{{ comment.time }}</div>
-        <div class="card-body text-dark">
-          <h5 class="card-title">{{ comment.username }}</h5>
-          <p class="card-text">{{ comment.content }}</p>
-
-          <form action="{% url 'main:upvote_comment' %}" method="post" class="form-inline">
-            {% csrf_token %}
-            <input class="form-control mr-1 col-10" type="hidden" name="comment_id" value="{{comment.id}}">
-            <input class="btn btn-primary col-auto" type="submit" value="Upvote {{comment.upvote}}"></input>
-          </form>
-
-
-        </div>
+      <div class="comment-card">
+        <p class="username">{{comment.username}}</p>
+        <p class="time">{{comment.time}}</p>
+        <p class="content">{{comment.content}}</p>
+        <form action="{% url 'main:upvote_comment' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="comment_id" value="{{comment.id}}">
+          <button id="upvotebutton" type="submit" class="btn btn-outline-dark" role="button">{{comment.upvote}} ❤️</button>
+        </form>
       </div>
       {% endfor %}
-
     </div>
   </div>
 </div>

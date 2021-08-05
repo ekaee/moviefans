@@ -123,3 +123,104 @@ footer p {
   color: white;
   font-size: 0.9em;
 }
+
+.movie {
+  padding: 20px 0px;
+  display: grid;
+  grid-template-columns: 340px auto;
+  column-gap: 20px;
+}
+
+.movie-pic {
+  display: inline-block;
+  margin: 10px 10px;
+}
+
+.movie-details {
+  display: inline-block;
+  margin: 10px 10px;
+  padding: 10px;
+}
+
+.movie-pic img {
+  height: 500px;
+  width: 337px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 6px 2px rgba(0, 0, 0, 0.123);
+}
+
+.movie-details .name {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.movie-details .genre {
+  color: #454546;
+}
+
+.genre .gen {
+  font-family: 'Indie Flower';
+  font-weight: bold;
+  font-size: 1.4em;
+  color: #4187cc;
+  text-transform: lowercase;
+}
+
+.movie-details .desc {
+  text-align: justify;
+  padding: 20px;
+  border-top: 1px solid #454546;
+}
+
+.rating-view button {
+  float: left;
+  margin: 0px 5px;
+  padding: 5px 20px;
+}
+
+.user-comments {
+  padding: 20px 0px;
+}
+
+.comment-card {
+  position: relative;
+  padding: 60px 30px 30px 30px;
+  border-top: 1px solid #45454667;
+}
+
+.comment-card .username {
+  color: #4187cc;
+  font-size: 1em;
+  font-weight: lighter;
+  position: absolute;
+  padding: 20px;
+  top: 0;
+  left: 0;
+}
+
+.comment-card .time {
+  color: #4187cc;
+  font-size: 0.9em;
+  font-weight: lighter;
+  position: absolute;
+  padding: 20px;
+  top: 0;
+  right: 0;
+}
+
+.comment-card form {
+  text-align: right;
+}
+
+.comment-card button {
+  padding: 3px 15px;
+}
+
+.comment-box {
+  padding: 20px 0px 60px 0px;
+}
+
+.commment-box button {
+  margin: 10px;
+}

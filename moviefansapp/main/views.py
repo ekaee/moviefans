@@ -37,7 +37,7 @@ def movie(request, movie_slug):
 
     try:
         movie = Movie.objects.get(slug=movie_slug)
-        comments = Comments.objects.filter(movie_id=movie)
+        comments = Comments.objects.filter(movie_id=movie).order_by('-time')
         context["movie"] = movie
         context["comments"] = comments
     except:
@@ -182,7 +182,7 @@ def add_comment(request):
                     user_id=user,
                 )
 
-            return HttpResponse("Success!")
+            return redirect("/movie/" + movie_slug)
 
     return HttpResponse("Add comment request failed.")
 
@@ -195,7 +195,7 @@ def upvote_comment(request):
             comment = Comments.objects.get(id=comment_id)
             comment.upvote += 1
             comment.save()
-            return HttpResponse("Upvote Success!")
+            return redirect("/movie/" + comment.movie_id.slug)
 
     return HttpResponse("Upvote comment request failed.")
 
