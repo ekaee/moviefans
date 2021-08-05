@@ -1,35 +1,25 @@
-{% extends 'main/base.html' %} {% load static %} 
-{% block title_block %} 
-  Genre
-{% endblock %} 
+{% extends 'main/base.html' %} {% load static %}
+{% block title_block %}
+Genre
+{% endblock %}
 
 {% block body_block %}
-
-<br><h4>{{genre}} Movies</h4><br>
-
-<div class="row">
-  {% for movie in genre_movies %}
-  <div class="col-md-3 col-sm-6">
-    <div class="card">
-        <div class="movie-grid">
-          <div class="image">
-            <a href="#" class="image">
-              <img class="card-img-top" src="{{movie.thumbnail.url}}" />
-              <div class="grid-info">
-                <ul class="rating"></ul>
-              </div>
-            </a>
+<div class="container">
+  <div class="cate">
+    <p class="logo movielist-logo"><span class="color-darkgray">{{genre}}</span><span class="color-blue">Movies</span></p>
+    <div class="movies">
+      {% for movie in genre_movies %}
+      <div class="card-custom">
+        <a href="{{movie.get_absolute_url}}">
+          <div class="pic">
+            <img src="{{movie.thumbnail.url}}">
+            <div class="rating">{{movie.rating}} ⭐</div>
           </div>
-          <h5 class="movie-rating">Upvotes: {{ movie.rating }}</a></h5>
-          <div class="movie">
-            <h3 class="title"><a href="#">{{ movie.name }}</a></h3>
-            <p class="card-text">{{movie.description}}</p>
-          </div>
-        </div>
+        </a>
+        <div class="text">{{movie.name}}</div>
       </div>
+      {% endfor %}
+    </div>
   </div>
-  {% endfor %}
-
-  <!-- TO-DO: Page navigator -->
 </div>
 {% endblock %}

@@ -49,13 +49,14 @@ body {
 
 .movies .pic img {
   height: 280px;
+  width: 190px;
   border-radius: 5px;
 }
 
 .movies .text {
   font-size: 1.2em;
   text-align: left;
-  max-width: 200px;
+  max-width: 190px;
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -68,7 +69,7 @@ body {
 .card-custom {
   display: inline-block;
   margin: 10px 10px;
-  max-width: 200px;
+  max-width: 190px;
 }
 
 .genres .genre {
@@ -94,8 +95,24 @@ footer {
 
 footer p {
   padding: 20px 0px 10px 0px;
+  margin: 0;
 }
 
 .movielist-logo {
   font-size: 4em;
+}
+
+.pic {
+  position: relative;
+}
+
+.rating {
+  position: absolute;
+  bottom: 0;
+  width: 190px;
+  background-color: rgba(0, 0, 0, 0.842);
+  border-radius: 0px 0px 5px 5px;
+  padding: 2px;
+  color: white;
+  font-size: 0.9em;
 }
