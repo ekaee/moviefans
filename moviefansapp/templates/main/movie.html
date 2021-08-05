@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block title_block %}
-Movie
+Movie - {{movie.name}}
 {% endblock %}
 
 {% block body_block %}
@@ -59,20 +59,13 @@ Movie
 
   <div class="comments">
     <div class="comment-box">
-
-
-
       <form action="{% url 'main:add_comment' %}" method="POST" class="form">
         {% csrf_token %}
         <input class="form-control mr-sm-4 col-md-8" type="hidden" name="movie_slug" value="{{movie.slug}}" />
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"
           placeholder="Type your comment here ..."></textarea>
         <button id="upvotebutton" type="submit" class="btn btn-outline-success float-right mt-2" role="button">Comment</button>
-
       </form>
-
-
-
     </div>
 
     <div class="user-comments">

@@ -1,32 +1,27 @@
 {% extends 'main/base.html' %} 
-{% load static %} 
+{% load static %}
+
 {% block title_block %} 
-  About
+  Moviefans - About
 {% endblock %} 
 
 {% block body_block %}
 
-<div class="container-fluid">
-  <div class="row">
-    <div
-      class="
-        offset-xl-0
-        col-xl-12
-        offset-lg-0
-        col-lg-12
-        offset-md-0
-        col-md-12
-        offset-sm-0
-        col-sm-12
-        offset-xs-0
-        col-xs-12
-      "
-    >
-      <h5>About</h5>
-      <p>MovieFans is a cool site about movies</p>
-      <p>Site Visits:</p>
-    </div>
-  </div>
+<div class="container about-main">
+  <p class="logo main-logo"><span class="color-darkgray">movie</span><span class="color-blue">fans</span></p>
+  <p class="slogan">ratings by the fans, for the fans</p>
+  <p class="desc1">
+    It is a website where users can find movie recommendations based on ratings and comments provided by the other users.
+  </p>
+  <p class="team">A project by Team SEGW</p>
+  <ul>
+    <li>Shengjing Wang</li>
+    <li>Ekaansh Singh</li>
+    <li>Grant Woollon</li>
+    <li>Weihang You</li> 
+  </ul>
+
+
 </div>
 
 {% endblock %}
