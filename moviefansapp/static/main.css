@@ -243,7 +243,26 @@ footer p {
 }
 
 .team {
-  padding: 40px 0px;
+  padding: 40px 0px 10px 0px;
   font-size: 1.5em;
   font-family: 'Indie Flower';
+}
+
+.desc {
+  padding: 20px 20px 0px 20px;
+  width: 350px;
+  margin: 0 auto;
+  font-weight: lighter;
+  text-transform: capitalize;
+}
+
+.about-main ul {
+  margin: 0;
+  padding: 0;
+}
+
+.about-main li {
+  font-size: 1.4em;
+  font-family: 'Indie Flower';
+  list-style-type: none;
 }
