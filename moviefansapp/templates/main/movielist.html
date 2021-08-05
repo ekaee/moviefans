@@ -5,44 +5,17 @@
 {% endblock %} 
 
 {% block body_block %}
-  <div class="container-fluid">
-    <div class="row">
-      <div
-        class="
-          offset-xl-2
-          col-xl-8
-          offset-lg-2
-          col-lg-8
-          offset-md-2
-          col-md-8
-          offset-sm-0
-          col-sm-12
-          offset-xs-0
-          col-xs-12
-        "
-      >
-        <div class="d-sm-none">debug: bootstrap screen size: xs</div>
-        <div class="d-none d-sm-block d-md-none d-lg-none d-xl-none">
-          debug: bootstrap screen size: sm
-        </div>
-        <div class="d-none d-md-block d-lg-none d-xl-none">
-          debug: bootstrap screen size: md
-        </div>
-        <div class="d-none d-lg-block d-xl-none">
-          debug: bootstrap screen size: lg
-        </div>
-        <div class="d-none d-xl-block">debug: bootstrap screen size: xl</div>
-        <h4>Search Results</h4>
-        <div class="card">
-          <img class="card-img-top" src="#" />
-          <div class="card-body">
-            <h5 class="card-text">
-              <a href="{% url 'main:movie_list' %}">Movie Name</a>
-            </h5>
-            <p class="card-text">Movie Description</p>
-          </div>
-        </div>
+<div class="container">
+  <div class="cate">
+    <p class="logo movielist-logo"><span class="color-darkgray">Movie</span><span class="color-blue">List</span></p>
+    <div class="movies">
+      {% for movie in movies %}
+      <div class="card-custom">
+        <a href="{{movie.get_absolute_url}}"><div class="pic"><img src="{{movie.thumbnail.url}}"></div></a>
+        <div class="text">{{movie.name}}</div>
       </div>
+      {% endfor %}
     </div>
   </div>
+</div>
 {% endblock %}

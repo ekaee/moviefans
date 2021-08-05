@@ -1,3 +1,4 @@
+from typing import ContextManager
 from main.models import Comments, Movie, UserProfile
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
@@ -47,7 +48,15 @@ def movie(request, movie_slug):
 
 
 def movie_list(request):
-    return render(request, "main/movielist.html")
+    context = {}
+
+    try:
+        movies = Movie.objects.all().order_by("name")
+        context["movies"] = movies
+    except:
+        context["movies"] = None
+
+    return render(request, "main/movielist.html", context=context)
 
 
 def genre(request, genre_slug):  # genre detail page
