@@ -8,25 +8,24 @@ Register
 {% block body_block %}
 
 <br><br><br><br>
-<div class="row" style="max-width: 1920px;">
-  <div class="offset-xl-0 col-xl-0 offset-lg-0 col-lg-4"></div>
-  <aside class="col-sm-4">
-    <div class="card">
-      <article class="card-body">
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-xl-4 col-xl-4 offset-lg-4 col-lg-4 offset-md-2 col-md-8 offset-sm-0 col-sm-12 offset-xs-0 col-xs-12">
+      <div class="card">
+        <article class="card-body">
+          <h4 class="card-title mb-4 mt-1">Register New User</h4>
+          <form method="POST">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+
+            <button type="submit" class="btn btn-primary">Sign up</button>
+            <a class="btn btn-primary float-right" href="{% url 'main:index' %}" role="button">Back</a>
+          </form>
 
 
-        <h4 class="card-title mb-4 mt-1">Register New User</h4>
-        <form method="POST">
-          {% csrf_token %}
-          {{ user_form|crispy }}
-
-          <button type="submit" class="btn btn-primary">Sign up</button>
-          <a class="btn btn-primary float-right" href="{% url 'main:index' %}" role="button">Back</a>
-        </form>
-
-
-      </article>
-    </div> <!-- card.// -->
-  </aside>
+        </article>
+      </div> <!-- card.// -->
+    </div>
+  </div>
 </div>
 {% endblock %}

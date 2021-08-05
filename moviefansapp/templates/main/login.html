@@ -7,38 +7,40 @@ Login
 
 {% block body_block %}
 <br><br><br><br>
-<div class="row" style="max-width: 1920px;">
-    <div class="offset-xl-0 col-xl-0 offset-lg-0 col-lg-4"></div>
-    <aside class="col-sm-4">
-        <div class="card">
-            <article class="card-body">
-                <a class="float-right btn btn-outline-primary" href="{% url 'main:register' %}">Register</a>
-                <h4 class="card-title mb-4 mt-1">Login</h4>
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ login_form|crispy }}
+<div class="container-fluid">
+    <div class="row">
+        <div class="offset-xl-4 col-xl-4 offset-lg-4 col-lg-4 offset-md-2 col-md-8 offset-sm-0 col-sm-12 offset-xs-0 col-xs-12">
+            <div class="card">
+                <article class="card-body">
+                    <a class="float-right btn btn-outline-primary" href="{% url 'main:register' %}">Register</a>
+                    <h4 class="card-title mb-4 mt-1">Login</h4>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ login_form|crispy }}
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                                </div>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <!-- <a class="small" href="{% url 'main:register' %}">Don't have a ID? Create one.</a> -->
+                                <a class="btn btn-primary float-right" href="{% url 'main:index' %}"
+                                    role="button">Back</a>
                             </div>
                         </div>
-                        <div class="col-md-8 text-right">
-                            <!-- <a class="small" href="{% url 'main:register' %}">Don't have a ID? Create one.</a> -->
-                            <a class="btn btn-primary float-right" href="{% url 'main:index' %}" role="button">Back</a>
-                        </div>
-                    </div>
-                </form>
-                {% if error %}
-                <hr>
-                <p>
-                    <button href="#" class="btn btn-block btn-outline-danger disabled">{{error}}</button>
-                    <!--just test-->
-                </p>
-                {% endif %}
-            </article>
-        </div> <!-- card.// -->
-    </aside>
+                    </form>
+                    {% if error %}
+                    <hr>
+                    <p>
+                        <button href="#" class="btn btn-block btn-outline-danger disabled">{{error}}</button>
+                        <!--just test-->
+                    </p>
+                    {% endif %}
+                </article>
+            </div> <!-- card.// -->
+        </div>
+    </div>
 </div>
 {% endblock %}
