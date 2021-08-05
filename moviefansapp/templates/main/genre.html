@@ -4,13 +4,14 @@
 {% endblock %} 
 
 {% block body_block %}
-<br><br>
+
+<br><h4>{{genre}} Movies</h4><br>
+
 <div class="row">
   {% for movie in genre_movies %}
   <div class="col-md-3 col-sm-6">
     <div class="card">
         <div class="movie-grid">
-          <!-- <input id="movie-stars" hidden value="3"> -->
           <div class="image">
             <a href="#" class="image">
               <img class="card-img-top" src="{{movie.thumbnail.url}}" />
@@ -19,6 +20,7 @@
               </div>
             </a>
           </div>
+          <h5 class="movie-rating">Upvotes: {{ movie.rating }}</a></h5>
           <div class="movie">
             <h3 class="title"><a href="#">{{ movie.name }}</a></h3>
             <p class="card-text">{{movie.description}}</p>
@@ -29,38 +31,5 @@
   {% endfor %}
 
   <!-- TO-DO: Page navigator -->
-
-  <!-- <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-end">
-      {% if movie_page.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="{{ url_prefix }}{{ current_page|add:-1 }}">Previous</a>
-        </li>
-      {% else %}
-        <li class="page-item disabled">
-          <a class="page-link" href="#" aria-disabled="true">Previous</a>
-        </li>
-      {% endif %}
-
-      {% for i in page_range %}
-        {% if i == current_page %}
-          <li class="page-item  active"><a class="page-link" href="#">{{ i }}</a></li>
-        {% else %}
-          <li class="page-item"><a class="page-link" href="{{ url_prefix }}{{ i }}">{{ i }}</a></li>
-        {% endif %}
-      {% endfor %}
-
-      {% if movie_page.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="{{ url_prefix }}{{ current_page|add:1 }}">Next</a>
-        </li>
-      {% else %}
-        <li class="page-item disabled">
-          <a class="page-link" aria-disabled="true" href="#">Next</a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav> -->
-
 </div>
 {% endblock %}
