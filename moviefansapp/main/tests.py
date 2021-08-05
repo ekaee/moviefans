@@ -1,9 +1,16 @@
 from django.test import TestCase, Client
+from django.urls import reverse
 from .models import Movie
 import os
 import re
-# Create your tests here.
+from django.contrib.auth.models import User
 
+def create_user():
+        user = User.objects.get_or_create(username='testuser',email='test@test.com')[0]
+        user.set_password('testabc123')
+        user.save()
+        return user
+    
 class PagesTest(TestCase):
     def setUp(self):
         # Every test needs a client.
@@ -11,30 +18,30 @@ class PagesTest(TestCase):
 
     def test_homepage(self):
         response = self.client.get('/')
-        self.failUnlessEqual(response.status_code, 200)
+        self.assertTrue(response.status_code, 200)
 
     def test_login(self):
         response = self.client.get('/login/')
-        self.failUnlessEqual(response.status_code, 200)
+        self.assertTrue(response.status_code, 200)
         
     def test_register(self):
         response = self.client.get('/register/')
-        self.failUnlessEqual(response.status_code, 200)
+        self.assertTrue(response.status_code, 200)
         
     def test_about(self):
         response = self.client.get('/about/')
-        self.failUnlessEqual(response.status_code, 200)
+        self.assertTrue(response.status_code, 200)
         
     def test_movie(self):
-        response = self.client.get('/movie_list/')
-        self.failUnlessEqual(response.status_code, 200)
+        response = self.client.get('/movie_listxx/')
+        self.assertTrue(response.status_code, 200)
     
 
-class viewTest(TestCase):
+class searchTest(TestCase):
     
     def test_search(self):
         response = self.client.post('/search/', {'q': 'action'})
-        self.failUnlessEqual(response.status_code, 200)
+        self.assertTrue(response.status_code, 200)
     
 class TemplatesTest(TestCase):
     
@@ -63,3 +70,24 @@ class TemplatesTest(TestCase):
         self.assertTrue(os.path.isfile(register_path), f"Your register.html template does not exist, or is in the wrong location.")
         self.assertTrue(os.path.isfile(genre_path), f"Your genre.html template does not exist, or is in the wrong location.")
         self.assertTrue(os.path.isfile(base_path), f"Your base.html template does not exist, or is in the wrong location.")
+    
+class AuthenticateTest(TestCase):
+    
+    def test_addmovie(self): 
+        user = create_user()    
+        self.client.login(username=user.username, password=user.password)  
+        
+        response = self.client.get(reverse('main:add_movie_page'))
+        self.assertTrue(response.status_code, 200)
+        
+    def test_addcomment(self): 
+        user = create_user()    
+        self.client.login(username=user.username, password=user.password)  
+        
+        response = self.client.get(reverse('main:add_comment'))
+        self.assertTrue(response.status_code, 200)
+    
+    def test_Resrict_addcomment(self):
+        
+        response = self.client.get(reverse('main:add_comment'))
+        self.assertEqual(response.status_code, 302, "failed to be restricted")
