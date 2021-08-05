@@ -34,12 +34,12 @@ def movie(request, movie_slug):
 
     try:
         movie = Movie.objects.get(slug=movie_slug)
-        # comments = Comments.objects.get(movie_id=movie)
+        comments = Comments.objects.filter(movie_id=movie)
         context["movie"] = movie
-        # context["comments"] = comments
+        context["comments"] = comments
     except:
         context["movie"] = None
-        # context["comments"] = None
+        context["comments"] = None
 
     return render(request, "main/movie.html", context=context)
 
