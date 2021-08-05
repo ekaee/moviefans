@@ -20,4 +20,5 @@ urlpatterns = [
     path("search/", views.search, name="search"),
     path("add_comment/", views.add_comment, name="add_comment"),
     path("upvote_comment/", views.upvote_comment, name="upvote_comment"),
+    path("add_view/", views.add_view, name="add_view"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

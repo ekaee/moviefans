@@ -5,6 +5,26 @@ Movie
 {% endblock %}
 
 {% block body_block %}
+<script
+			  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+			  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+			  crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      type: "GET",
+      url: "/add_view/",
+      data: {
+        movie: window.location.pathname.substr(7)
+      },
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  });
+
+</script>
+
 <div class="container-fluid">
   <div class="row">
     <div class="
@@ -138,14 +158,15 @@ Movie
         offset-xs-0
         col-xs-12
       ">
-    <form action="{% url 'main:add_comment' %}" method="POST" class="form">
-      <input class="form-control mr-sm-4 col-md-8" type="hidden" name="movie_id" value="{{movie.slug}}" />
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content" placeholder="Type your comment here..."></textarea>
-      {% csrf_token %}
-      <button id="upvotebutton" type="submit" class="btn btn-primary my-2 my-sm-0" href="#" role="button">
-        Comment!
-      </button>
-    </form>
+      <form action="{% url 'main:add_comment' %}" method="POST" class="form">
+        <input class="form-control mr-sm-4 col-md-8" type="hidden" name="movie_id" value="{{movie.slug}}" />
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"
+          placeholder="Type your comment here..."></textarea>
+        {% csrf_token %}
+        <button id="upvotebutton" type="submit" class="btn btn-primary my-2 my-sm-0" href="#" role="button">
+          Comment!
+        </button>
+      </form>
     </div>
   </div>
   <br /><br />

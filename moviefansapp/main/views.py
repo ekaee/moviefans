@@ -208,3 +208,13 @@ def add_movie(request):
     # )
 
     return redirect(reverse("main:index"))
+
+def add_view(request):
+    if request.method == 'GET':
+        movie_slug = request.GET['movie']
+        movie = Movie.objects.get(slug=movie_slug)
+        movie.views += 1
+        movie.save()
+        return HttpResponse("Success!")
+    else:
+        return HttpResponse("Invalid request")
