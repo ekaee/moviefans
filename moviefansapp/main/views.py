@@ -1,3 +1,4 @@
+from typing import ContextManager
 from main.models import Comments, Movie, UserProfile
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
@@ -50,7 +51,7 @@ def movie_list(request):
     context = {}
 
     try:
-        movies = Movie.objects.all()
+        movies = Movie.objects.all().order_by("name")
         context["movies"] = movies
     except:
         context["movies"] = None

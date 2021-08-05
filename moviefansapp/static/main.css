@@ -55,6 +55,10 @@ body {
 .movies .text {
   font-size: 1.2em;
   text-align: left;
+  max-width: 200px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cate-logo {
@@ -64,6 +68,7 @@ body {
 .card-custom {
   display: inline-block;
   margin: 10px 10px;
+  max-width: 200px;
 }
 
 .genres .genre {
@@ -89,4 +94,8 @@ footer {
 
 footer p {
   padding: 20px 0px 10px 0px;
+}
+
+.movielist-logo {
+  font-size: 4em;
 }
