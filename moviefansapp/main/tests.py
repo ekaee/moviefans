@@ -1,10 +1,11 @@
 from django.test import TestCase, Client
 from .models import Movie
-
+import os
+import re
 # Create your tests here.
 
 
-class CinemaPagesTestCase(TestCase):
+class PagesTest(TestCase):
     def setUp(self):
         # Every test needs a client.
         self.client = Client()
@@ -29,12 +30,15 @@ class CinemaPagesTestCase(TestCase):
         response = self.client.get('/movie/action-movie-1')
         self.failUnlessEqual(response.status_code, 200)
     
+
+class viewTest(TestCase):
+    
     def test_search(self):
         response = self.client.post('/search/', {'q': 'action'})
         self.failUnlessEqual(response.status_code, 200)
-
-# something wrong with this test
-    def test_genre(self):
-        response = self.client.get('/genre/comedy')
-        self.assertIn(response.status_code, (301, 302))
-
+    
+class TemplatesTest(TestCase):
+    
+    def test_templates_exist(self):
+        index_path = os.path.join(self.rango_templates_dir, 'index.html')
+        about_path = os.path.join(self.rango_templates_dir, 'about.html')
