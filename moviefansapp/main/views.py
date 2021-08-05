@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 
 
 def index(request):
@@ -70,17 +72,19 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-            user.set_password(user.password)
-            user.save()
+            # user.set_password(user.password)
+            # user.save()
+            login(request, user)
+            messages.success(request, "Registration successful.")
 
-            profile = profile_form.save(commit=False)
-            profile.user = user
+            # profile = profile_form.save(commit=False)
+            # profile.user = user
 
-            if "picture" in request.FILES:
-                profile.picture = request.FILES["picture"]
+            # if "picture" in request.FILES:
+            #     profile.picture = request.FILES["picture"]
 
-            profile.save()
-            registered = True
+            # profile.save()
+            # registered = True
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -99,28 +103,28 @@ def register(request):
 
 
 # TODO: Check URLs
-def login(request):
+def login_page(request):
     if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(username=username, password=password)
 
-        user = authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
+            if user is not None:
                 login(request, user)
+                messages.info(request, f"You are now logged in as {username}.")
                 return redirect(reverse("main:index"))
             else:
-                return HttpResponse("Your main account is disabled.")
+                messages.error(request, "Invalid username or password.")
         else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, "main/login.html")
+            messages.error(request, "Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request, "main/login.html", context={"login_form": form})
 
 
 @login_required
-def logout(request):
+def logout_page(request):
     logout(request)
     return redirect(reverse("main:index"))
 
@@ -135,7 +139,7 @@ def search(request):
     return render(request, "main/search.html", {"results": results, "query": query})
 
 
-# @login_required
+@login_required
 def likeMovie(request):
     query = request.POST.get("query_name")
     if query:
@@ -147,7 +151,7 @@ def likeMovie(request):
             likedMovie.save()
     else:
         results = []
-    return redirect("/movie/"+query)
+    return redirect("/movie/" + query)
 
 
 @login_required
@@ -209,12 +213,18 @@ def add_movie(request):
 
     return redirect(reverse("main:index"))
 
+
 def add_view(request):
-    if request.method == 'GET':
-        movie_slug = request.GET['movie']
+    if request.method == "GET":
+        movie_slug = request.GET["movie"]
         movie = Movie.objects.get(slug=movie_slug)
         movie.views += 1
         movie.save()
         return HttpResponse("Success!")
     else:
         return HttpResponse("Invalid request")
+
+
+@login_required
+def private(request):
+    return HttpResponse("Only seen when logged in.")

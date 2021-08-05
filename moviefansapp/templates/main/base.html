@@ -34,7 +34,7 @@
 
       {% if user.is_authenticated %}
       <a class="btn btn-primary my-2 my-sm-0" href="#" role="button">{{ user.username }}</a>
-      <a class="btn btn-outline-primary my-2 my-sm-0" href="#" role="button">Logout</a>
+      <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'main:logout' %}" role="button">Logout</a>
       {% else %}
       <a class="btn btn-outline-primary my-2 my-sm-0 mr-2" href="{% url 'main:login' %}" role="button">Login</a>
       <a class="btn btn-primary my-2 my-sm-0" href="{% url 'main:register' %}" role="button">Register</a>
