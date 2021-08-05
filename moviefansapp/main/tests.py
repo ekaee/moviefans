@@ -35,6 +35,6 @@ class CinemaPagesTestCase(TestCase):
 
 # something wrong with this test
     def test_genre(self):
-        response = self.client.get('genre/comedy')
+        response = self.client.get('/genre/comedy')
         self.assertIn(response.status_code, (301, 302))
 
