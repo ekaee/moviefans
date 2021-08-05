@@ -39,3 +39,54 @@ body {
   padding-top: 20px;
 }
 
+.cate {
+  position: relative;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 0px;
+}
+
+.movies .pic img {
+  height: 280px;
+  border-radius: 5px;
+}
+
+.movies .text {
+  font-size: 1.2em;
+  text-align: left;
+}
+
+.cate-logo {
+  font-size: 1.8em !important;
+}
+
+.card-custom {
+  display: inline-block;
+  margin: 10px 10px;
+}
+
+.genres .genre {
+  display: inline-block;
+  font-family: 'Indie Flower';
+  font-weight: bold;
+  font-size: 1.3em;
+  color: #454546;
+}
+
+.genre a {
+  color: inherit;
+}
+
+.genre:nth-child(2n) {
+  color: #4187cc;
+}
+
+footer {
+  text-align: center;
+  background-color: #f8f9fa ;
+}
+
+footer p {
+  padding: 20px 0px 10px 0px;
+}
