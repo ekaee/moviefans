@@ -17,11 +17,17 @@ git clone https://github.com/ekaee/moviefans.git
 ```bash
 cd moviefans
 python3 -m venv env
+
+# In case you are using anaconda;
+conda create --name env
 ```
 
 ```bash
 # Activating the environment
 source env/bin/activate
+
+# In case you are using anaconda;
+conda activate env
 ```
 
 - Install all the required dependecies using the package manager [pip](https://pip.pypa.io/en/stable/).
