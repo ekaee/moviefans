@@ -1,11 +1,14 @@
+# os setup
 import os
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "moviefansapp.settings")
 
+# django setup
 import django
-
 django.setup()
+
+# model imports
 from main.models import Movie, Genre, Comments
+from django.contrib.auth.models import User
 
 
 def populate():
@@ -190,22 +193,37 @@ def populate():
     for gx in genres:
         g = add_genre(gx['name'])
         for mx in gx['pages']:
-            add_movie(g, mx['name'], mx['description'], mx['img'], mx['rating'], mx['views'])
+            m = add_movie(g, mx['name'], mx['description'], mx['img'], mx['rating'], mx['views'])
+            add_comment(m, User.objects.get(username="testuser"), "Test: Wonderful movie! would watch it again!!", "testuser")
 
+# helper func: creating a sameple user
+def create_user():
+    user = User.objects.get_or_create(username='testuser',email='test@test.com')[0]
+    user.set_password('testabc123')
+    user.save()
+    return user
 
+# helper func: adding sample genre data to db
 def add_genre(name):
     g = Genre.objects.get_or_create(name=name)[0]
     g.save()
     return g
 
-
+# helper func: adding sample movie data to db
 def add_movie(genre, name, description, img, rating, views):
     m = Movie.objects.get_or_create(
         genre_id=genre, name=name, description=description, thumbnail=img, rating=rating, views=views)[0]
     m.save()
     return m
 
+# helper func: adding sample comment data to db
+def add_comment(movie, user, comment, username):
+    c = Comments.objects.get_or_create(movie_id=movie, user_id=user, content=comment, username=username)[0]
+    c.save()
+    return c
+
 
 if __name__ == '__main__':
     print("Running populate script")
+    create_user()
     populate()
