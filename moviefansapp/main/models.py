@@ -5,11 +5,11 @@ from django.urls.base import reverse
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
-
+# Global Variables
 NAME_MAX_LENGTH = 128
 CONTENT_MAX_LENGTH = 2000
 
-
+# Django - user model modification
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to="profile_images", blank=True)
@@ -19,6 +19,7 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+# movie categories model
 class Genre(models.Model):
 
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
@@ -34,7 +35,7 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
-
+# movie model / connected to genre model
 class Movie(models.Model):
     DESCRIPTION_MAX_LENGTH = 200
 
@@ -62,6 +63,7 @@ class Movie(models.Model):
         return self.name
 
 
+# comment model associated with movie and user models
 class Comments(models.Model):
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     content = models.CharField(max_length=CONTENT_MAX_LENGTH, default="")  # comment

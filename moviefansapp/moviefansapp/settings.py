@@ -133,5 +133,7 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
+# Media files from active web app
+
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = "/media/"

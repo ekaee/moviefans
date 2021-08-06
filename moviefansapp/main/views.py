@@ -13,7 +13,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
-
+# serving homepage view
 def index(request):
     movies_most_viewed = Movie.objects.order_by("-views")[:5]
     movies_top_rated = Movie.objects.order_by("-rating")[:5]
@@ -26,7 +26,7 @@ def index(request):
 
     return render(request, "main/index.html", context=context)
 
-
+# static page
 def about(request):
     return render(request, "main/about.html")
 
@@ -46,7 +46,7 @@ def movie(request, movie_slug):
 
     return render(request, "main/movie.html", context=context)
 
-
+# lists out all the movies in database
 def movie_list(request):
     context = {}
 
@@ -58,7 +58,7 @@ def movie_list(request):
 
     return render(request, "main/movielist.html", context=context)
 
-
+# gives a list of movies with associated genre
 def genre(request, genre_slug):  # genre detail page
     context = {}
 
@@ -73,7 +73,7 @@ def genre(request, genre_slug):  # genre detail page
 
     return render(request, "main/genre.html", context=context)
 
-
+# user authentication with django pre made model
 def register(request):
     registered = False
 
@@ -144,7 +144,7 @@ def logout_page(request):
     logout(request)
     return redirect(reverse("main:index"))
 
-
+# gives out list of movies that matches name query
 def search(request):
     query = request.POST.get("query_name")
     if query:
@@ -154,7 +154,7 @@ def search(request):
         results = []
     return render(request, "main/search.html", {"results": results, "query": query})
 
-
+# helper func - handles movie rating
 @login_required
 def likeMovie(request):
     query = request.POST.get("query_name")
@@ -169,7 +169,7 @@ def likeMovie(request):
         results = []
     return redirect("/movie/" + query)
 
-
+# helper func - handles movie comment
 @login_required
 def add_comment(request):
     if request.user.is_authenticated:
@@ -201,7 +201,7 @@ def add_comment(request):
 
     return HttpResponse("Add comment request failed.")
 
-
+# helper func - handles movie comment rating
 @login_required
 def upvote_comment(request):
     if request.user.is_authenticated:
@@ -214,7 +214,7 @@ def upvote_comment(request):
 
     return HttpResponse("Upvote comment request failed.")
 
-
+# helper func - handles adding new movies to database
 @login_required
 def add_movie_page(request):
     if request.method == "POST":
@@ -226,7 +226,7 @@ def add_movie_page(request):
     movie_form = AddMovieForm()
     return render(request, "main/add_movie.html", context={"movie_form": movie_form})
 
-
+# helper func - AJAX reqest - handles views per page
 def add_view(request):
     if request.method == "GET":
         movie_slug = request.GET["movie"]
@@ -237,7 +237,7 @@ def add_view(request):
     else:
         return HttpResponse("Invalid request")
 
-
+# test page for auth
 @login_required
 def private(request):
     return HttpResponse("Only seen when logged in.")

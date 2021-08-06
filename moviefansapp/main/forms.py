@@ -4,7 +4,7 @@ from django.db.models import fields
 from main.models import Movie, UserProfile
 from django.contrib.auth.forms import UserCreationForm
 
-
+# user auth form
 class UserForm(UserCreationForm):
     email = forms.EmailField(required=False)
 
@@ -30,7 +30,7 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ("picture",)
 
-
+# add_movie html poge
 class AddMovieForm(forms.ModelForm):
     class Meta:
         model = Movie

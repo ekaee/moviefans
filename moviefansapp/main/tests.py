@@ -5,12 +5,14 @@ import os
 import re
 from django.contrib.auth.models import User
 
+# Test: user creation
 def create_user():
         user = User.objects.get_or_create(username='testuser',email='test@test.com')[0]
         user.set_password('testabc123')
         user.save()
         return user
-    
+
+# Test: url redirects  
 class PagesTest(TestCase):
     def setUp(self):
         # Every test needs a client.
@@ -36,13 +38,14 @@ class PagesTest(TestCase):
         response = self.client.get('/movie_listxx/')
         self.assertTrue(response.status_code, 200)
     
-
+# Test: search helper func test
 class searchTest(TestCase):
     
     def test_search(self):
         response = self.client.post('/search/', {'q': 'action'})
         self.assertTrue(response.status_code, 200)
-    
+
+# Test: checking if necessary files exist
 class TemplatesTest(TestCase):
     
     def setUp(self):
@@ -70,7 +73,8 @@ class TemplatesTest(TestCase):
         self.assertTrue(os.path.isfile(register_path), f"Your register.html template does not exist, or is in the wrong location.")
         self.assertTrue(os.path.isfile(genre_path), f"Your genre.html template does not exist, or is in the wrong location.")
         self.assertTrue(os.path.isfile(base_path), f"Your base.html template does not exist, or is in the wrong location.")
-    
+
+# Test: basic authentication check
 class AuthenticateTest(TestCase):
     
     def test_addmovie(self): 

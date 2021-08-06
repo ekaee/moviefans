@@ -1,7 +1,7 @@
 from django.contrib import admin
 from main.models import UserProfile, Movie, Genre, Comments
 
-# Register your models here.
+# Register models to appear on admin panel
 
 
 class UserProfileAdmin(admin.ModelAdmin):
