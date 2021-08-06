@@ -21,7 +21,7 @@ python3 -m venv env
 
 ```bash
 # Activating the environment
-source bikeshare_env/bin/activate
+source env/bin/activate
 ```
 
 - Install all the required dependecies using the package manager [pip](https://pip.pypa.io/en/stable/).
