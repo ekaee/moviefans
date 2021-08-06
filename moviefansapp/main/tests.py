@@ -1,8 +1,8 @@
+import os
 from django.test import TestCase, Client
 from django.urls import reverse
 from .models import Movie
-import os
-import re
+from django.db.models.query import QuerySet
 from django.contrib.auth.models import User
 
 # Test: user creation
@@ -13,9 +13,8 @@ def create_user():
         return user
 
 # Test: url redirects  
-class PagesTest(TestCase):
+class PagesResponseTest(TestCase):
     def setUp(self):
-        # Every test needs a client.
         self.client = Client()
 
     def test_homepage(self):
@@ -92,6 +91,27 @@ class AuthenticateTest(TestCase):
         self.assertTrue(response.status_code, 200)
     
     def test_Resrict_addcomment(self):
-        
         response = self.client.get(reverse('main:add_comment'))
         self.assertEqual(response.status_code, 302, "failed to be restricted")
+        
+#Test: check the response Topviewed and Topupvotes function
+class TestTopViewed(TestCase):
+    
+    # check top Viewed movies
+    def test_top_viewed(self):
+        response = self.client.get(reverse('main:index'))
+        expected_movies_most_viewed = list(Movie.objects.order_by("-views")[:5])
+        self.assertTrue('movies_most_viewed' in response.context, "Couldn't find 'movies_most_viewed' variable in the index() view's context dictionary. Check index.html")
+        self.assertEqual(type(response.context['movies_most_viewed']), QuerySet, "movies_most_viewed' variable in the index() view's context dictionary doesn't return a QuerySet as expected.")
+        self.assertEqual(expected_movies_most_viewed, list(response.context['movies_most_viewed']), 
+                         f"The 'pages' context dictionary variable for the index() view didn't return the QuerySet we were expectecting: got {list(response.context['movies_most_viewed'])}, expected {expected_movies_most_viewed}. Did you apply the correct ordering to the filtered results?")
+        
+    # check top Upvoted movies
+    def test_topUpvoted(self):
+        response = self.client.get(reverse('main:index'))
+        expected_movies_top_rated = list(Movie.objects.order_by("-rating")[:5])
+        self.assertTrue('movies_top_rated' in response.context, "Couldn't find 'movies_top_rated' variable in the index() view's context dictionary. Check index.html")
+        self.assertEqual(type(response.context['movies_top_rated']), QuerySet, "movies_top_rated' variable in the index() view's context dictionary doesn't return a QuerySet as expected.")
+        self.assertEqual(expected_movies_top_rated, list(response.context['movies_most_viewed']), 
+                         f"The 'pages' context dictionary variable for the index() view didn't return the QuerySet we were expectecting: got {list(response.context['movies_top_rated'])}, expected {expected_movies_top_rated}. Did you apply the correct ordering to the filtered results?")
+        
