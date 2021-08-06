@@ -31,7 +31,7 @@ body {
   padding: 10vh 0;
   background-image: url("/static/images/searchbg.jpg");
   background-position: top;
-  background-size: 80%;
+  background-size: 100%;
 }
 
 .search-box {
@@ -58,11 +58,13 @@ body {
   height: 280px;
   width: 190px;
   border-radius: 5px;
+  box-shadow: 1px 1px 2px 2px #5a5a5a48;
 }
 
 .movies .text {
   font-size: 1.2em;
-  text-align: left;
+  text-align: center;
+  font-weight: 550;
   max-width: 190px;
   white-space: nowrap; 
   overflow: hidden;
