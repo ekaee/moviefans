@@ -19,7 +19,7 @@ cd moviefans
 python3 -m venv env
 
 # In case you are using anaconda;
-conda create --name env
+conda create -n env python=3.7.5
 ```
 
 ```bash
